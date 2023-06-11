@@ -1,0 +1,48 @@
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/debug/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.242" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/drawable/bg_chat_receive.xml" value="0.249" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/drawable/bg_chat_send.xml" value="0.249" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/drawable/bottom_background_cricle.xml" value="0.249" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/drawable/bottom_background_red.xml" value="0.255" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/drawable/gradient.xml" value="0.1205" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/drawable/login_background.xml" value="0.254" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/drawable/register_background.xml" value="0.254" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/layout/activity_chat_bot.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/layout/activity_eat.xml" value="0.23489583333333333" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/layout/activity_exercise.xml" value="0.23489583333333333" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/layout/activity_exercise_patient.xml" value="0.23489583333333333" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/layout/activity_initial_page.xml" value="0.264" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/layout/activity_login.xml" value="0.12757201646090535" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/layout/activity_main_patient.xml" value="0.23489583333333333" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/layout/activity_map_position.xml" value="0.23489583333333333" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/layout/activity_maps.xml" value="0.23489583333333333" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/layout/activity_registration.xml" value="0.12757201646090535" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/layout/activity_remember_picture.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/layout/activity_remember_upload_image.xml" value="0.23489583333333333" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/layout/activity_scale.xml" value="0.23489583333333333" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/layout/activity_scale_dir.xml" value="0.23489583333333333" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/layout/activity_setting.xml" value="0.23489583333333333" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/layout/activity_sos.xml" value="0.23489583333333333" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/layout/activity_tic_one_player.xml" value="0.23489583333333333" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/layout/activity_treaty.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/layout/activity_wu_zi_qi.xml" value="0.23489583333333333" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/layout/adapter_main.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/layout/adapter_message_one.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/layout/exercise_list.xml" value="0.23489583333333333" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/layout/recipe_list.xml" value="0.23489583333333333" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.249" />
+        <entry key="..\:/Users/sl306/AndroidStudioProjects/0316/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.242" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
