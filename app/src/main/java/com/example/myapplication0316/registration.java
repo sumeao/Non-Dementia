@@ -12,7 +12,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
+
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,25 +33,25 @@ public class registration extends Activity {
     Integer login = 0;
 
 
-    public boolean isTableExists(String databasePath, String tableName) {
-        SQLiteDatabase db = null;
-        try {
-            db = SQLiteDatabase.openDatabase(databasePath, null, SQLiteDatabase.OPEN_READONLY);
-            Cursor cursor = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name=?", new String[]{tableName});
-            boolean tableExists = (cursor != null) && (cursor.getCount() > 0);
-            if (cursor != null) {
-                cursor.close();
-            }
-            return tableExists;
-        } catch (SQLiteException e) {
-            e.printStackTrace();
-        } finally {
-            if (db != null) {
-                db.close();
-            }
-        }
-        return false;
-    }
+//    public boolean isTableExists(String databasePath, String tableName) {
+//        SQLiteDatabase db = null;
+//        try {
+//            db = SQLiteDatabase.openDatabase(databasePath, null, SQLiteDatabase.OPEN_READONLY);
+//            Cursor cursor = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name=?", new String[]{tableName});
+//            boolean tableExists = (cursor != null) && (cursor.getCount() > 0);
+//            if (cursor != null) {
+//                cursor.close();
+//            }
+//            return tableExists;
+//        } catch (SQLiteException e) {
+//            e.printStackTrace();
+//        } finally {
+//            if (db != null) {
+//                db.close();
+//            }
+//        }
+//        return false;
+//    }
 
 
     @SuppressLint("MissingInflatedId")

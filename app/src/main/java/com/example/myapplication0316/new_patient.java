@@ -2,8 +2,6 @@ package com.example.myapplication0316;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,12 +11,11 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -30,22 +27,23 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class caregiver_setting extends AppCompatActivity {
+public class new_patient extends AppCompatActivity {
 
-    ImageView sethead, save;
+    ImageView sethead;
+    Button save;
     private Uri selectedImageUri;
     private SQLiteDatabase db;
-    Uri imageuri;
     private static final int REQUEST_IMAGE_PICKER = 1;
-    private static String careName;
-    private static String carePhone;
-    private static String careMail;
-    private static String carePatient;
+    private static String patientName;
+    private static String patientSex;
+    private static String patientBirthday;
+    private static String patientLevel;
+    private static String patientCare;
     private Uri croppedImageUri; // 全局變量，用於保存裁剪後的圖片路徑
 
 
-    EditText EditcareName, EditcarePhone, EditcarePatient, EditcareMail;
-    String account;
+    EditText EditpatientName, EditpatientSex, EditpatientBirthday, EditpatientLevel, EditpatientCare;
+    String check;
     private byte[] imageData;
     Bitmap bitmap;
 
@@ -53,79 +51,18 @@ public class caregiver_setting extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_caregiver_setting);
+        setContentView(R.layout.activity_new_patient);
 
-        EditcareName = findViewById(R.id.editTextTextPersonName);
-        EditcarePhone = findViewById(R.id.editTextTextPersonNumber);
-        EditcareMail = findViewById(R.id.editTextTextPersonAddress);
-        EditcarePatient = findViewById(R.id.editTextTextPersonDisease1);
+        EditpatientName = findViewById(R.id.editTextTextPersonName);
+        EditpatientSex = findViewById(R.id.editTextTextPersonNumber);
+        EditpatientLevel = findViewById(R.id.editTextTextPersonAddress);
+        EditpatientCare = findViewById(R.id.editTextTextPersonDisease1);
+        EditpatientBirthday = findViewById(R.id.patientBirthday);
         sethead = findViewById(R.id.sethead);
         save = findViewById(R.id.save);
 
         SqlDataBaseHelper dbHelper = new SqlDataBaseHelper(getApplicationContext());
         db = dbHelper.getReadableDatabase(); // 開啟資料庫
-
-
-        // 构建查询语句
-        String[] projection = {
-                "account",
-                "name",
-                "phone",
-                "patient1",
-                "email",
-                "photo"
-        };
-
-        String selection = ""; // 可以使用适当的条件
-        String[] selectionArgs = new String[0]; // 如果有条件，提供相应的参数
-        String sortOrder = ""; // 可以指定排序顺序
-
-        // 执行查询
-        Cursor c = db.query(
-                "caregiver",
-                projection,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                sortOrder
-        );
-
-        // 遍历查询结果
-        if (c.moveToFirst()) {
-            String caregiverName = c.getString(c.getColumnIndexOrThrow("name"));
-            String caregiverPhone = c.getString(c.getColumnIndexOrThrow("phone"));
-            String caregiverPatient = c.getString(c.getColumnIndexOrThrow("patient1"));
-            String caregiverEmail = c.getString(c.getColumnIndexOrThrow("email"));
-            imageData = c.getBlob(c.getColumnIndexOrThrow("photo"));
-
-//            System.out.println("=================================");
-//            System.out.println(imageData);
-
-            if (imageData != null) {
-                bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
-                sethead.setImageBitmap(bitmap);
-            }
-
-            account = c.getString(c.getColumnIndexOrThrow("account"));
-
-            EditcareName.setText(caregiverName);
-            EditcarePhone.setText(caregiverPhone);
-            EditcareMail.setText(caregiverEmail);
-            EditcarePatient.setText(caregiverPatient);
-
-
-            careName = caregiverName;
-            carePhone = caregiverPhone;
-            careMail = caregiverEmail;
-            carePatient = caregiverPatient;
-
-        }
-
-
-        // 关闭游标和数据库连接
-        c.close();
-
 
         sethead.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,46 +77,46 @@ public class caregiver_setting extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                careName = EditcareName.getText().toString();
-                carePhone = EditcarePhone.getText().toString();
-                careMail = EditcareMail.getText().toString();
-                carePatient = EditcarePatient.getText().toString();
+                patientName = EditpatientName.getText().toString();
+                patientBirthday = EditpatientBirthday.getText().toString();
+                patientSex = EditpatientSex.getText().toString();
+                patientCare = EditpatientCare.getText().toString();
+                patientLevel = EditpatientLevel.getText().toString();
 
-                // 將裁剪後的圖片轉換為位元組數組
-                if (croppedImageUri != null) {
-                    imageData = getByteArrayFromUri(croppedImageUri);
-                }
-                System.out.println("====================================================");
-                System.out.println(croppedImageUri);
-                System.out.println(imageData);
-                // 將位元組數組插入到資料庫的 photo 欄位
-                ContentValues values = new ContentValues();
-                values.put("name", careName);
-                values.put("phone", carePhone);
-                values.put("email", careMail);
-                values.put("patient1", carePatient);
-                values.put("photo", imageData);
-
-//                System.out.println("===============================");
-//                System.out.println(careName);
-//                System.out.println(imageData);
-
-                String tableName = "caregiver";
-                String selection = "account = ?";
-                String[] selectionArgs = new String[]{account};
-
-                int rowsAffected = db.update(tableName, values, selection, selectionArgs);
-
-
-                if (rowsAffected > 0) {
-                    Toast.makeText(view.getContext(), "資料更新成功", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(caregiver_setting.this, MainActivity.class);
-                    startActivity(intent);
+                if (patientName == null || patientBirthday == null || patientSex == null || patientCare == null || patientLevel == null) {
+                    System.out.println("您還有尚未填寫的欄位喔!!!");
                 } else {
-                    Toast.makeText(view.getContext(), "資料更新失敗", Toast.LENGTH_LONG).show();
-                }
-                db.close();
+                    // 將裁剪後的圖片轉換為位元組數組
+                    if (croppedImageUri != null) {
+                        imageData = getByteArrayFromUri(croppedImageUri);
+                    }else{
 
+                    }
+                    System.out.println("====================================================");
+                    System.out.println(croppedImageUri);
+                    System.out.println(imageData);
+                    // 將位元組數組插入到資料庫的 photo 欄位
+                    ContentValues values = new ContentValues();
+                    values.put("name", patientName);
+                    values.put("sex", patientSex);
+                    values.put("birthday", patientBirthday);
+                    values.put("caregiver", patientCare);
+                    values.put("level", patientLevel);
+                    values.put("photo", imageData);
+
+                    String tableName = "patient";
+
+                    long rowsAffected = db.insert(tableName, null, values);
+
+                    if (rowsAffected != -1) {
+                        Toast.makeText(view.getContext(), "病患資料新增成功", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(new_patient.this, MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(view.getContext(), "病患資料新增失敗", Toast.LENGTH_LONG).show();
+                    }
+                    db.close();
+                }
             }
         });
 
@@ -246,6 +183,4 @@ public class caregiver_setting extends AppCompatActivity {
             return null;
         }
     }
-
-
 }

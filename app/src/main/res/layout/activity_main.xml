@@ -109,21 +109,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
 
-        <TableLayout
-            android:id="@+id/tableLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:stretchColumns="*"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/logoutTableRow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+
+
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:stretchColumns="*"
+            >
+
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:layout_weight="1"
                 android:gravity="center">
 
                 <LinearLayout
@@ -474,14 +480,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <ImageButton
-                            android:id="@+id/BtnGame"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageView6"
-                            app:layout_constraintEnd_toEndOf="@+id/imageView6"
-                            app:layout_constraintStart_toStartOf="@+id/imageView6"
-                            app:layout_constraintTop_toTopOf="@+id/imageView6" />
+
 
                         <ImageView
                             android:id="@+id/imageView5"
@@ -495,9 +494,9 @@
                             app:srcCompat="@drawable/white" />
 
                         <ImageView
-                            android:id="@+id/imageView6"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
+                            android:id="@+id/patient_set"
+                            android:layout_width="67dp"
+                            android:layout_height="62dp"
                             app:layout_constraintBottom_toBottomOf="@+id/imageView5"
                             app:layout_constraintEnd_toEndOf="@+id/imageView5"
                             app:layout_constraintStart_toStartOf="@+id/imageView5"
@@ -527,14 +526,49 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <ImageButton
-                            android:id="@+id/BtnGPS"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageView6"
-                            app:layout_constraintEnd_toEndOf="@+id/imageView6"
-                            app:layout_constraintStart_toStartOf="@+id/imageView6"
-                            app:layout_constraintTop_toTopOf="@+id/imageView6" />
+                        <ImageView
+                            android:id="@+id/imageView7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/white" />
+
+                        <ImageView
+                            android:id="@+id/exchange"
+                            android:layout_width="67dp"
+                            android:layout_height="62dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/imageView7"
+                            app:layout_constraintEnd_toEndOf="@+id/imageView7"
+                            app:layout_constraintStart_toStartOf="@+id/imageView7"
+                            app:layout_constraintTop_toTopOf="@+id/imageView7"
+                            app:srcCompat="@drawable/exchange" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="切換病患模式"
+                        android:textAlignment="center"
+                        android:textColor="#34346E"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
                         <ImageView
                             android:id="@+id/imageView7"
@@ -548,7 +582,7 @@
                             app:srcCompat="@drawable/white" />
 
                         <ImageView
-                            android:id="@+id/imageView6"
+                            android:id="@+id/setting"
                             android:layout_width="67dp"
                             android:layout_height="62dp"
                             app:layout_constraintBottom_toBottomOf="@+id/imageView7"
@@ -573,26 +607,33 @@
 
             </TableRow>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/logout"
-                    android:layout_width="150dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/logout"
-                    android:scaleType="fitCenter"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-            </TableRow>
         </TableLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TableRow
+            android:id="@+id/logoutTableRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:layout_editor_absoluteY="416dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/logout"
+                android:layout_width="230dp"
+                android:layout_height="100dp"
+                android:background="@drawable/logout"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </TableRow>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

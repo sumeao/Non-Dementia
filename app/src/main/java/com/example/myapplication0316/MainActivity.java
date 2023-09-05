@@ -3,6 +3,7 @@ package com.example.myapplication0316;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Application;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -29,18 +30,18 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-//    private SpeechRecognizer mSpeechRecognizer;
+    //    private SpeechRecognizer mSpeechRecognizer;
 //    private Intent mRecognizerIntent;
 //    private SpeechRecognizer speechRecognizer;
 //    private Intent speechRecognitionIntent;
     private static SQLiteDatabase db;
     private SqlDataBaseHelper sqlDataBaseHelper;
-    private byte[] imageData,imageData2;
+    private byte[] imageData, imageData2;
     Bitmap bitmap;
 
 
-    ImageButton Btnlogout, BtnEx, BtnGame,  BtnEat, BtnScale, BtnGPS, BtnChatbot;
-    ImageView BtnCare,BtnPatient,doublr_arrow;
+    ImageButton BtnEx, BtnGame, BtnEat, BtnScale, BtnGPS, BtnChatbot;
+    ImageView BtnCare, BtnPatient, changePatient, patient_set, setting, Btnlogout,exchange;
 
     String[] bot = {"阿德同學", "阿的同學", "嘿", "喂", "同學"};
     String[] model = {"玩", "遊戲", "做", "檢測", "運動", "吃飯", "提醒", "聊天", "基本資料"};
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<ArrayList<Integer>> botcode = new ArrayList();
     ArrayList<Integer> Ubot = new ArrayList();
     ArrayList<Integer> Uword = new ArrayList();
-    TextView caregiverName,patientName;
+    TextView caregiverName, patientName;
 
 
 //    public void setunicode() {
@@ -63,9 +64,6 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
 
-
-
-
     @SuppressLint("SetTextI18n")
     public boolean SqlAccountCheck(String account, String selectionArgs) {
 
@@ -73,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
         db = sqlDataBaseHelper.getReadableDatabase(); // 開啟資料庫
 
         String test = "";
-        String[] test2 = {selectionArgs,"1"};
-        test = account+" AND login = ?";
+        String[] test2 = {selectionArgs, "1"};
+        test = account + " AND login = ?";
 
         System.out.println("-----------------------------------------");
         System.out.println(account);
@@ -84,12 +82,12 @@ public class MainActivity extends AppCompatActivity {
         c.moveToFirst();
 
 
-       if(c.getCount() == 0){
-           return true;
+        if (c.getCount() == 0) {
+            return true;
 
-       }else {
-           return false;
-       }
+        } else {
+            return false;
+        }
     }
 
 
@@ -103,15 +101,17 @@ public class MainActivity extends AppCompatActivity {
         BtnEx = findViewById(R.id.BtnEx);
         BtnGame = findViewById(R.id.BtnGame);
         BtnCare = findViewById(R.id.caregiver);
-
         BtnEat = findViewById(R.id.BtnEat);
         BtnScale = findViewById(R.id.BtnGame2);
         BtnPatient = findViewById(R.id.patient);
         BtnGPS = findViewById(R.id.BtnGPS);
         BtnChatbot = findViewById(R.id.BtnChatbot);
-        doublr_arrow =  findViewById(R.id.double_arrow);
+        changePatient = findViewById(R.id.double_arrow);
         caregiverName = findViewById(R.id.caregiver_name);
         patientName = findViewById(R.id.patient_name);
+        patient_set = findViewById(R.id.patient_set);
+        setting = findViewById(R.id.setting);
+        exchange = findViewById(R.id.exchange);
 
         // 取得SharedPreference
         SharedPreferences getPrefs = PreferenceManager
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
         String accountArgs = getPrefs.getString("accountArg", "null");
         String[] selectionArgs = accountArgs.split(",");
-        String account = getPrefs.getString("account","account");
+        String account = getPrefs.getString("account", "account");
 
         System.out.println("-----------------------------------------");
         System.out.println(accountArgs);
@@ -164,8 +164,8 @@ public class MainActivity extends AppCompatActivity {
         Cursor d = db.query(
                 "caregiver",
                 projection,
-                selection,
-                selectionArgs2,
+                account,
+                selectionArgs,
                 null,
                 null,
                 sortOrder
@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
             String patient = d.getString(d.getColumnIndexOrThrow("patient1"));
             imageData = d.getBlob(d.getColumnIndexOrThrow("photo"));
 
-            caregiverName.setText("照護者名稱:\n"+caregiver);
+            caregiverName.setText("照護者名稱:\n" + caregiver);
 //            System.out.println("=================================");
 //            System.out.println(imageData);
 
@@ -194,19 +194,17 @@ public class MainActivity extends AppCompatActivity {
                 bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
                 BtnCare.setImageBitmap(bitmap);
             }
-            if(patient != null){
-                patientName.setText("病患名稱:\n"+patient);
+            if (patient != null) {
+                patientName.setText("病患名稱:\n" + patient);
             }
-            if(e.moveToFirst()){
+            if (e.moveToFirst()) {
                 imageData2 = e.getBlob(d.getColumnIndexOrThrow("photo"));
                 if (imageData2 != null) {
                     bitmap = BitmapFactory.decodeByteArray(imageData2, 0, imageData2.length);
                     BtnPatient.setImageBitmap(bitmap);
+                }
+
             }
-
-        }
-
-
 
 
 //        for (String str : bot) {
@@ -218,97 +216,117 @@ public class MainActivity extends AppCompatActivity {
 //        }
 
 
+            Btnlogout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-        Btnlogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                    ContentValues values = new ContentValues();
+                    values.put("login", 0);
 
-                ContentValues values = new ContentValues();
-                values.put("login", 0);
+                    int rowsAffected = db.update("caregiver", values, account, selectionArgs);
 
-                int rowsAffected = db.update("caregiver", values, account, selectionArgs);
-
-                if (rowsAffected > 0) {
-                    System.out.println("-------------------------------------");
-                    System.out.println(rowsAffected);
-                    // 更新成功
-                    Toast.makeText(view.getContext(), "登出成功", Toast.LENGTH_SHORT).show();
-                    db.close();
-                    Intent intent = new Intent(MainActivity.this, login.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    // 更新失败
-                    Toast.makeText(view.getContext(), "登出失败", Toast.LENGTH_SHORT).show();
+                    if (rowsAffected > 0) {
+                        System.out.println("-------------------------------------");
+                        System.out.println(rowsAffected);
+                        // 更新成功
+                        Toast.makeText(view.getContext(), "登出成功", Toast.LENGTH_SHORT).show();
+                        db.close();
+                        Intent intent = new Intent(MainActivity.this, login.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        // 更新失败
+                        Toast.makeText(view.getContext(), "登出失败", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
-        BtnEx.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, newExercise.class);
-                startActivity(intent);
-            }
-        });
-        BtnEat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Eat.class);
-                startActivity(intent);
-            }
-        });
-        BtnScale.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, scale.class);
-                startActivity(intent);
-            }
-        });
-        BtnCare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, caregiver_setting.class);
-                startActivity(intent);
-            }
-        });
-        BtnPatient.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, patient_setting.class);
-                startActivity(intent);
-            }
-        });
-        BtnGame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Game.class);
-                startActivity(intent);
-            }
-        });
-        BtnGPS.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, newmap.class);
-                startActivity(intent);
+            });
+            BtnEx.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(MainActivity.this, Exercise.class);
+                    startActivity(intent);
+                }
+            });
+            BtnEat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(MainActivity.this, Eat.class);
+                    startActivity(intent);
+                }
+            });
+            BtnScale.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(MainActivity.this, scale.class);
+                    startActivity(intent);
+                }
+            });
+            BtnCare.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(MainActivity.this, caregiver_show.class);
+                    startActivity(intent);
+                }
+            });
+            BtnPatient.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(MainActivity.this, patient_show.class);
+                    startActivity(intent);
+                }
+            });
+            BtnGame.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(MainActivity.this, Game.class);
+                    startActivity(intent);
+                }
+            });
+            BtnGPS.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(MainActivity.this, newmap.class);
+                    startActivity(intent);
 
-            }
-        });
-        BtnChatbot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ChatBot.class);
-                startActivity(intent);
-            }
-        });
+                }
+            });
+//        BtnChatbot.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this, ChatBot.class);
+//                startActivity(intent);
+//            }
+//        });
 
-        doublr_arrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, patient.class);
-                startActivity(intent);
-            }
-        });
+            changePatient.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
+                }
+            });
+
+            patient_set.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(MainActivity.this, patient_set.class);
+                    startActivity(intent);
+                }
+            });
+
+            exchange.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(MainActivity.this, patient.class);
+                    startActivity(intent);
+                }
+            });
+
+            setting.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
 //        startSpeechRecognition();
 
 
@@ -462,11 +480,13 @@ public class MainActivity extends AppCompatActivity {
 ////                startSpeechRecognition();
 //            }
 //        });
-    }
+        }
 
 //    private void startSpeechRecognition() {
 //        if (!tent) {
 //            speechRecognizer.startListening(speechRecognitionIntent);
 //        }
 //    }
-}}
+    }
+}
+//}

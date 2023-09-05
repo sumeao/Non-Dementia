@@ -145,37 +145,6 @@ public class patient_setting extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_IMAGE_PICKER);
             }
         });
-//
-//        EditpatientBirthday.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//            }
-//        });
-
-        EditpatientSex.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-
-        EditpatientCare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-
-        EditpatientName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-
-        EditpatientLevel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

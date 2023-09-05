@@ -34,16 +34,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/imageView30"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_margin="18dp"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/sethead"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:src="@drawable/head_bg"
+                app:civ_border_color="#FFFFFF"
+                app:civ_border_width="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/empty_bg" />
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--            <ImageView-->
+            <!--                android:id="@+id/head_bg"-->
+            <!--                android:layout_width="280dp"-->
+            <!--                android:layout_height="280dp"-->
+            <!--                android:layout_margin="18dp"-->
+            <!--                android:background="#00000000"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:srcCompat="@drawable/empty_bg" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -62,25 +75,27 @@
             android:id="@+id/imageView25"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:tint="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ground_banner_background" />
+            app:srcCompat="@drawable/ground_banner_background"
+            app:tint="#FFFFFF" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/constraintLayout14"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/imageView25"
             app:layout_constraintTop_toTopOf="@+id/imageView25">
 
             <TableLayout
                 android:id="@+id/tableLayout4"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:shrinkColumns="*"
+                android:stretchColumns="*"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -88,14 +103,16 @@
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start">
 
                     <TextView
                         android:id="@+id/textView16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="32dp"
+                        android:ems="5"
+                        android:gravity="center"
                         android:text="姓名"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
@@ -105,22 +122,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="12"
-                        android:inputType="textPersonName"
-                        android:hint="蘇阿公" />
+                        android:hint="病患名稱"
+                        android:inputType="textPersonName" />
 
                 </TableRow>
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start">
 
                     <TextView
                         android:id="@+id/textView17"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="32dp"
-                        android:text="電話"
+                        android:ems="5"
+                        android:gravity="center"
+                        android:text="性別"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
@@ -129,22 +148,50 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="12"
-                        android:inputType="textPersonName"
-                        android:hint="0900000000" />
+                        android:hint="男/女"
+                        android:inputType="textPersonName" />
 
                 </TableRow>
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start">
+
+                    <TextView
+                        android:id="@+id/textView70"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="5"
+                        android:gravity="center"
+                        android:text="生日"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <EditText
+                        android:id="@+id/patientBirthday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="2000/00/00"
+                        android:inputType="textPersonName" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start">
 
                     <TextView
                         android:id="@+id/textView18"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="32dp"
-                        android:text="住址"
+                        android:ems="5"
+                        android:gravity="center"
+                        android:text="等級"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
@@ -153,22 +200,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="12"
-                        android:inputType="textPersonName"
-                        android:hint="台灣市台灣區台灣路1號" />
+                        android:hint="等級1/2/3/4/5"
+                        android:inputType="textPersonName" />
 
                 </TableRow>
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start">
 
                     <TextView
                         android:id="@+id/textView19"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="32dp"
-                        android:text="病史"
+                        android:ems="5"
+                        android:gravity="center"
+                        android:text="照護者"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
@@ -177,49 +226,26 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="10"
-                        android:inputType="textPersonName"
-                        android:hint="輕度認知障礙" />
+                        android:hint="照護者名稱"
+                        android:inputType="textPersonName" />
 
                 </TableRow>
 
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+                    <Button
+                        android:id="@+id/save"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:text="確認" />
+                </TableRow>
             </TableLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout14"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/imageView25">
-
-            <ImageButton
-                android:id="@+id/save"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                android:layout_marginBottom="12dp"
-                android:background="@color/white"
-                android:tint="#CAD6D6"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/button_background_1" />
-
-            <TextView
-                android:id="@+id/textView20"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="儲 存"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/save"
-                app:layout_constraintEnd_toEndOf="@+id/save"
-                app:layout_constraintStart_toStartOf="@+id/save"
-                app:layout_constraintTop_toTopOf="@+id/save" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
